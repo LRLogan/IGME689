@@ -3,6 +3,7 @@
     "com.esri.arcgis-maps-sdk": "file:C:/Users/LRLar/Downloads/arcgis-maps-sdk-unity-2.1.0.tgz",
     "com.unity.collab-proxy": "2.9.3",
     "com.unity.feature.development": "1.0.1",
+    "com.unity.inputsystem": "1.7.0",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.render-pipelines.high-definition": "14.0.11",
     "com.unity.splines": "2.6.1",
