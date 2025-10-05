@@ -59,8 +59,8 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(nameof(GetFeatures));
         mapComponent = FindFirstObjectByType<ArcGISMapComponent>();
+        StartCoroutine(nameof(GetFeatures));
     }
 
     public void CreateLink(string link)
@@ -93,6 +93,7 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
         }
         else
         {
+            Debug.Log(Request.downloadHandler.text);
             CreateGameObjectsFromResponse(Request.downloadHandler.text);
         }
     }

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class CarController : MonoBehaviour
 {
+    /*
     // root reference of the prefab
     public Transform rootTransform;
 
@@ -179,4 +180,5 @@ public class CarController : MonoBehaviour
             // }
         }
     }
+    */
 }
