@@ -58,6 +58,12 @@ namespace Unity.Splines.Examples
         [SerializeField]
         float m_TextureScale = 1f;
 
+        [SerializeField, Min(0.001f)]
+        float m_GlobalWidth = 1f;
+
+        [SerializeField]
+        GameObject m_RoadPrefab;
+
         public IReadOnlyList<Spline> splines => LoftSplines;
 
         public IReadOnlyList<Spline> LoftSplines
@@ -87,7 +93,24 @@ namespace Unity.Splines.Examples
                     return m_Mesh;
 
                 m_Mesh = new Mesh();
-                GetComponent<MeshRenderer>().sharedMaterial = Resources.Load<Material>("Road");
+                var renderer = GetComponent<MeshRenderer>();
+
+                // Use prefab material if provided, otherwise fallback to Resources "Road" or Standard
+                if (m_RoadPrefab != null)
+                {
+                    var prefabRenderer = m_RoadPrefab.GetComponent<MeshRenderer>();
+                    if (prefabRenderer != null && prefabRenderer.sharedMaterial != null)
+                    {
+                        renderer.sharedMaterial = prefabRenderer.sharedMaterial;
+                    }
+                }
+
+                if (renderer.sharedMaterial == null)
+                {
+                    var defaultMat = Resources.Load<Material>("Road");
+                    renderer.sharedMaterial = defaultMat != null ? defaultMat : new Material(Shader.Find("Standard"));
+                }
+
                 return m_Mesh;
             }
         }
@@ -110,7 +133,7 @@ namespace Unity.Splines.Examples
                 m_LoftRoadsRequested = false;
             }
         }
-        
+
         public void OnEnable()
         {
             // Avoid to point to an existing instance when duplicating the GameObject
@@ -143,7 +166,7 @@ namespace Unity.Splines.Examples
 #endif
 
             if (m_Mesh != null)
-#if  UNITY_EDITOR
+#if UNITY_EDITOR
                 DestroyImmediate(m_Mesh);
 #else
                 Destroy(m_Mesh);
@@ -165,7 +188,7 @@ namespace Unity.Splines.Examples
                 var delta = LoftSplines.Count - m_Widths.Count;
                 for (var i = 0; i < delta; i++)
                 {
-#if  UNITY_EDITOR
+#if UNITY_EDITOR
                     Undo.RecordObject(this, "Modifying Widths SplineData");
 #endif
                     m_Widths.Add(new SplineData<float>() { DefaultValue = 1f });
@@ -254,6 +277,15 @@ namespace Unity.Splines.Examples
             LoftMesh.UploadMeshData(false);
 
             GetComponent<MeshFilter>().sharedMesh = m_Mesh;
+
+            // --- Add or update MeshCollider for physics ---
+            var meshCollider = GetComponent<MeshCollider>();
+            if (meshCollider == null)
+                meshCollider = gameObject.AddComponent<MeshCollider>();
+
+            meshCollider.sharedMesh = null;      
+            meshCollider.sharedMesh = m_Mesh;    
+
         }
 
         public void Loft(Spline spline, int widthDataIndex)
@@ -268,6 +300,7 @@ namespace Unity.Splines.Examples
             if (length <= 0.001f)
                 return;
 
+            // Use SegmentsPerMeter to determine resolution (same pattern as original sample)
             var segmentsPerLength = SegmentsPerMeter * length;
             var segments = Mathf.CeilToInt(segmentsPerLength);
             var segmentStepT = (1f / SegmentsPerMeter) / length;
@@ -306,6 +339,7 @@ namespace Unity.Splines.Examples
                 var scale = transform.lossyScale;
                 var tangent = math.normalizesafe(math.cross(up, dir)) * new float3(1f / scale.x, 1f / scale.y, 1f / scale.z);
 
+                // Width pulled from spline data (w is treated as half-width, same as original)
                 var w = 1f;
                 if (widthDataIndex < m_Widths.Count)
                 {
@@ -317,6 +351,9 @@ namespace Unity.Splines.Examples
                     }
                 }
 
+                // Apply global width multiplier (keeps original semantics where w is half-width)
+                w *= m_GlobalWidth;
+
                 m_Positions.Add(pos - (tangent * w));
                 m_Positions.Add(pos + (tangent * w));
                 m_Normals.Add(up);
@@ -327,14 +364,17 @@ namespace Unity.Splines.Examples
                 t = math.min(1f, t + segmentStepT);
             }
 
-            for (int i = 0, n = prevVertexCount; i < triangleCount; i += 6, n += 2)
+            // Build triangles without wrapping/modulus to avoid seam gaps
+            for (int i = 0; i < segments; i++)
             {
-                m_Indices.Add((n + 2) % (prevVertexCount + vertexCount));
-                m_Indices.Add((n + 1) % (prevVertexCount + vertexCount));
-                m_Indices.Add((n + 0) % (prevVertexCount + vertexCount));
-                m_Indices.Add((n + 2) % (prevVertexCount + vertexCount));
-                m_Indices.Add((n + 3) % (prevVertexCount + vertexCount));
-                m_Indices.Add((n + 1) % (prevVertexCount + vertexCount));
+                int baseIndex = prevVertexCount + i * 2;
+                m_Indices.Add(baseIndex);
+                m_Indices.Add(baseIndex + 2);
+                m_Indices.Add(baseIndex + 1);
+
+                m_Indices.Add(baseIndex + 1);
+                m_Indices.Add(baseIndex + 2);
+                m_Indices.Add(baseIndex + 3);
             }
         }
     }
