@@ -17,8 +17,15 @@ namespace Unity.Splines.Examples
     [RequireComponent(typeof(SplineContainer), typeof(MeshRenderer), typeof(MeshFilter))]
     public class LoftRoadBehaviour : MonoBehaviour
     {
-        [SerializeField]
-        List<SplineData<float>> m_Widths = new List<SplineData<float>>();
+        [SerializeField] GameObject m_RoadPrefab;
+
+        [SerializeField] List<SplineData<float>> m_Widths = new List<SplineData<float>>();
+        [SerializeField] int m_SegmentsPerMeter = 1;
+        [SerializeField] Mesh m_Mesh;
+        [SerializeField] float m_TextureScale = 1f;
+        [SerializeField, Min(0.001f)] float m_GlobalWidth = 1f;
+
+        public IReadOnlyList<Spline> splines => LoftSplines;
 
         public List<SplineData<float>> Widths
         {
@@ -48,23 +55,6 @@ namespace Unity.Splines.Examples
             }
             set => m_Spline = value;
         }
-
-        [SerializeField]
-        int m_SegmentsPerMeter = 1;
-
-        [SerializeField]
-        Mesh m_Mesh;
-
-        [SerializeField]
-        float m_TextureScale = 1f;
-
-        [SerializeField, Min(0.001f)]
-        float m_GlobalWidth = 1f;
-
-        [SerializeField]
-        GameObject m_RoadPrefab;
-
-        public IReadOnlyList<Spline> splines => LoftSplines;
 
         public IReadOnlyList<Spline> LoftSplines
         {

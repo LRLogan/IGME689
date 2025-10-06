@@ -49,6 +49,7 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
     private List<FeatureQueryData> Features = new List<FeatureQueryData>();
     private FeatureData featureInfo;
     [SerializeField] private GameObject featurePrefab;
+    [SerializeField] private GameObject checkpointPrefab;
     private JToken[] jFeatures;
     private float spawnHeight = 0;
 
@@ -108,6 +109,9 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
 
     private void CreateFeatures()
     {
+        int checkpointNum = 0;
+        Vector3? previousPos = null;
+
         foreach (var feature in jFeatures)
         {
             // Get coordinates in the Feature Service
@@ -129,8 +133,27 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
                 // Convert ArcGISPoint to Engine Coordinates
                 bezierKnot.Position = mapComponent.GeographicToEngine(position);
 
+                // Spawn a checkpoint prefab at this position
+                if (checkpointPrefab != null)
+                {
+                    Quaternion rot = Quaternion.identity;
+
+                    if (previousPos.HasValue)
+                    {
+                        Vector3 roadDir = ((Vector3)bezierKnot.Position - previousPos.Value).normalized;
+                        rot = Quaternion.LookRotation(roadDir, Vector3.up);
+
+                        GameObject checkpoint = Instantiate(checkpointPrefab, bezierKnot.Position, rot, transform);
+                        checkpoint.name = $"Checkpoint_{checkpointNum}";
+                        checkpoint.GetComponent<Checkpoint>().checkpointID = checkpointNum++;
+                    }
+                }
+                else Debug.LogWarning("Checkpoint Prefab not assigned in inspector!");
+
                 // Add converted position to the splines container
                 splineContainer.Splines[0].Add(bezierKnot);
+
+                previousPos = bezierKnot.Position;
             }
         }
     }

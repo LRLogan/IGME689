@@ -21,6 +21,8 @@ public class CarController : MonoBehaviour
     private Vector2 inputDir;
     private float currentSpeed;
 
+    public int curCheckpoint = 0;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
