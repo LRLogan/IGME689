@@ -10,7 +10,8 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<CarController>().curCheckpoint = checkpointID;
+            other.GetComponent<CarController>().curCheckpoint++; 
+            other.GetComponent<CarController>().curCheckpointObj = this.gameObject; 
         }
     }
 }

@@ -22,6 +22,7 @@ public class CarController : MonoBehaviour
     private float currentSpeed;
 
     public int curCheckpoint = 0;
+    public GameObject curCheckpointObj;
 
     private void Start()
     {
