@@ -42,7 +42,7 @@ public class RaceManager : MonoBehaviour
         if (!player.raceEnded)
         {
             timerTxt.text = $"Race Time: {(timeElapsed += Time.deltaTime):F2}";
-            checkpointNumTxt.text = $"Checkpoint #: {player.curCheckpoint} / 347";
+            checkpointNumTxt.text = $"Checkpoint #: {player.curCheckpoint} / >347";
 
             if (!race1) timeToBeatTxt.text = $"Time To Beat: {timeToBeat}";
         }
@@ -64,7 +64,6 @@ public class RaceManager : MonoBehaviour
 
     public void Respawn()
     {
-        player.curCheckpoint--;
         player.gameObject.transform.position = player.curCheckpointObj.transform.position;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
