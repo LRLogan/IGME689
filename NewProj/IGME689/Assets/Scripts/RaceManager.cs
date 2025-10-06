@@ -64,6 +64,7 @@ public class RaceManager : MonoBehaviour
 
     public void Respawn()
     {
+        player.curCheckpoint--;
         player.gameObject.transform.position = player.curCheckpointObj.transform.position;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
@@ -78,6 +79,7 @@ public class RaceManager : MonoBehaviour
     public void PlayAgain()
     {
         timeElapsed = 0;
+        player.curCheckpoint = 0;
         player.gameObject.transform.position = startingPoint;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.raceEnded = false;

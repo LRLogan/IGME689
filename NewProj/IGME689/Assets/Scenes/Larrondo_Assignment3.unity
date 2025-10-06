@@ -122,7 +122,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!43 &279519298
+--- !u!43 &99607210
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -478,7 +478,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time To Beat:'
+  m_text: 'Time To Beat: TBD'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -843,10 +843,10 @@ MonoBehaviour:
   timerTxt: {fileID: 915851969}
   checkpointNumTxt: {fileID: 973649328}
   raceEndTxt: {fileID: 1875105305}
-  timeToBeatTxt: {fileID: 0}
+  timeToBeatTxt: {fileID: 416553207}
   restartBtn: {fileID: 689957677}
   respawnBtn: {fileID: 910581311}
-  playAgainBtn: {fileID: 0}
+  playAgainBtn: {fileID: 1558587067}
 --- !u!1 &689957675
 GameObject:
   m_ObjectHideFlags: 0
@@ -930,7 +930,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 689694927}
         m_TargetAssemblyTypeName: RaceManager, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
@@ -1152,7 +1152,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 689694927}
         m_TargetAssemblyTypeName: RaceManager, Assembly-CSharp
         m_MethodName: Respawn
         m_Mode: 1
@@ -1791,7 +1791,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1558587068}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 689694927}
+        m_TargetAssemblyTypeName: RaceManager, Assembly-CSharp
+        m_MethodName: PlayAgain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1558587068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1970,10 +1982,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 1567364416}
   raceEnded: 0
-  maxSpeed: 60
+  maxSpeed: 70
   accelerationRate: 25
-  decelerationRate: 15
-  turnSpeed: 300
+  decelerationRate: 10
+  turnSpeed: 320
   inputLerpSpeed: 5
   curCheckpoint: 0
   curCheckpointObj: {fileID: 0}
@@ -2967,7 +2979,7 @@ MonoBehaviour:
   m_RoadPrefab: {fileID: 0}
   m_Widths: []
   m_SegmentsPerMeter: 1
-  m_Mesh: {fileID: 279519298}
+  m_Mesh: {fileID: 99607210}
   m_TextureScale: 1
   m_GlobalWidth: 10
   m_Spline: {fileID: 1942107581}
@@ -2978,7 +2990,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942107580}
-  m_Mesh: {fileID: 279519298}
+  m_Mesh: {fileID: 99607210}
 --- !u!64 &1942107588
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3000,7 +3012,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 279519298}
+  m_Mesh: {fileID: 99607210}
 --- !u!1001 &1673281065556427950
 PrefabInstance:
   m_ObjectHideFlags: 0
