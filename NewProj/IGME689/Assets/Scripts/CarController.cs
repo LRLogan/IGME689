@@ -1,65 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody))]
 public class CarController : MonoBehaviour
 {
-    // root reference of the prefab
-    public Transform rootTransform;
+    [Header("Root Reference")]
+    public Transform rootTransform; // Used for visuals
 
+    [Header("Race State")]
     public bool raceEnded = false;
 
     [Header("Kart Settings")]
     public float maxSpeed = 60f;
-    public float turnSpeed = 40;
-    public float inputLerpSpeed = 5f; //Lerp speed for input smoothing
-    public Vector3 acceleration; //How fast karts velocity changes        
-    public Vector3 movementDirection;
-    public Quaternion turning;
-    public Vector3 inputFixed;
-    public bool isDriving;
+    public float accelerationRate = 25f;
+    public float decelerationRate = 15f;
+    public float turnSpeed = 40f;
+    public float inputLerpSpeed = 5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Rigidbody rb;
+    private Vector2 inputDir;
+    private float currentSpeed;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     private void FixedUpdate()
     {
-        // Move as long as the race has not ended
-        if(!raceEnded)
+        if (raceEnded)
         {
-            // Movement
-            movementDirection.x = Mathf.Lerp(movementDirection.x, inputFixed.x, inputLerpSpeed * Time.deltaTime);
-            movementDirection.z = inputFixed.z;
+            rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, Time.fixedDeltaTime * 2f);
+            return;
+        }
 
-            // Turning
+        // Smooth the input
+        Vector2 smoothedInput = Vector2.Lerp(Vector2.zero, inputDir, inputLerpSpeed * Time.fixedDeltaTime);
+
+        // Forward/backward movement
+        if (smoothedInput.y > 0f) currentSpeed += accelerationRate * Time.fixedDeltaTime;
+        else if (smoothedInput.y < 0f) currentSpeed -= accelerationRate * Time.fixedDeltaTime;
+        else currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, decelerationRate * Time.fixedDeltaTime);
+
+        currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
+
+        // Apply velocity
+        Vector3 move = transform.forward * currentSpeed;
+        rb.velocity = new Vector3(move.x, rb.velocity.y, move.z);
+
+        // Turning only if moving
+        if (Mathf.Abs(smoothedInput.x) > 0.05f && Mathf.Abs(currentSpeed) > 0.05f)
+        {
+            float turn = smoothedInput.x * turnSpeed * Time.fixedDeltaTime * Mathf.Sign(currentSpeed);
+            Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
+            rb.MoveRotation(rb.rotation * turnRotation);
         }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 input = context.ReadValue<Vector2>();
-        inputFixed = new Vector3(input.x, 0, input.y);
-
-        // Determines when driving starts and when driving ends
-        if (context.started)
-        {
-            isDriving = true;
-        }
-        else if (context.canceled)
-        {
-            isDriving = false;
-        }
+        inputDir = context.ReadValue<Vector2>();
+        Debug.Log("Move input: " + inputDir);
     }
-    
 }
