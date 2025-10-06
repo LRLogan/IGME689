@@ -8,6 +8,7 @@ using TMPro;
 /// <summary>
 /// Attach this to finish line
 /// </summary>
+[RequireComponent(typeof(AudioSource))]
 public class RaceManager : MonoBehaviour
 {
     [SerializeField] private CarController player;
@@ -20,17 +21,20 @@ public class RaceManager : MonoBehaviour
     private float timeToBeat = float.MaxValue;
     private bool race1 = true;
 
-    // Start is called before the first frame update
+    [Header("Audio")]
+    [SerializeField] private AudioClip finishSfx; // Sound to play when race ends
+    private AudioSource audioSource;
+
     void Start()
     {
         startingPoint = player.transform.position;
-
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(player.curCheckpointObj == null)
+        if (player.curCheckpointObj == null)
         {
             lastCheckpointLoc = startingPoint;
         }
@@ -50,13 +54,21 @@ public class RaceManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player") && player.curCheckpoint >= 347)
+        if (other.gameObject.CompareTag("Player") && player.curCheckpoint >= 347)
         {
+            // Play finish sound effect
+            Debug.Log("Playing sound: " + finishSfx);
+            if (finishSfx != null)
+                audioSource.PlayOneShot(finishSfx);
+
             player.raceEnded = true;
             raceEndTxt.gameObject.SetActive(true);
             playAgainBtn.gameObject.SetActive(true);
             race1 = false;
-            if(timeElapsed < timeToBeat) timeToBeat = timeElapsed;
+
+            if (timeElapsed < timeToBeat)
+                timeToBeat = timeElapsed;
+
             restartBtn.gameObject.SetActive(false);
             respawnBtn.gameObject.SetActive(false);
         }

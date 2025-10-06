@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))] // Ensure AudioSource exists
 public class CarController : MonoBehaviour
 {
     [Header("Root Reference")]
@@ -20,14 +21,23 @@ public class CarController : MonoBehaviour
     private Rigidbody rb;
     private Vector2 inputDir;
     private float currentSpeed;
+    private Vector2 smoothedInput;
 
     public int curCheckpoint = 0;
     public GameObject curCheckpointObj;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip moveSfx; // Sound to play while moving
+    private AudioSource audioSource;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.loop = true; // Loop engine sound while moving
+        audioSource.playOnAwake = false;
     }
 
     private void FixedUpdate()
@@ -39,7 +49,7 @@ public class CarController : MonoBehaviour
         }
 
         // Smooth the input
-        Vector2 smoothedInput = Vector2.Lerp(Vector2.zero, inputDir, inputLerpSpeed * Time.fixedDeltaTime);
+        smoothedInput = Vector2.Lerp(Vector2.zero, inputDir, inputLerpSpeed * Time.fixedDeltaTime);
 
         // Forward/backward movement
         if (smoothedInput.y > 0f) currentSpeed += accelerationRate * Time.fixedDeltaTime;
@@ -58,6 +68,19 @@ public class CarController : MonoBehaviour
             float turn = smoothedInput.x * turnSpeed * Time.fixedDeltaTime * Mathf.Sign(currentSpeed);
             Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
             rb.MoveRotation(rb.rotation * turnRotation);
+        }
+
+        // Handle movement sound playback based on  velocity
+        bool carIsMoving = rb.velocity.magnitude > 0.5f; 
+
+        if (carIsMoving && !audioSource.isPlaying && moveSfx != null)
+        {
+            audioSource.clip = moveSfx;
+            audioSource.Play();
+        }
+        else if (!carIsMoving && audioSource.isPlaying)
+        {
+            audioSource.Stop();
         }
     }
 
