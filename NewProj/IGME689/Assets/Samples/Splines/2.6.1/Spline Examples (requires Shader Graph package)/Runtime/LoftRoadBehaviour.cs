@@ -12,6 +12,9 @@ using Interpolators = UnityEngine.Splines.Interpolators;
 
 namespace Unity.Splines.Examples
 {
+    /// <summary>
+    /// Creates a road of game objects (default road) out of a spline 
+    /// </summary>
     [ExecuteInEditMode]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(SplineContainer), typeof(MeshRenderer), typeof(MeshFilter))]

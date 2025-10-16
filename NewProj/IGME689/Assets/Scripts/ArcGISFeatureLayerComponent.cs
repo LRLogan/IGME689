@@ -16,6 +16,9 @@ using UnityEngine.Networking;
 using UnityEngine;
 using UnityEngine.Splines;
 
+/// <summary>
+/// Creates a spline using data from a feature layer
+/// </summary>
 public class ArcGISFeatureLayerComponent : MonoBehaviour
 {
     [System.Serializable]
