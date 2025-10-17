@@ -19,6 +19,7 @@ using UnityEngine.Splines;
 /// <summary>
 /// Creates a spline using data from a feature layer
 /// This version if modified by Logan Larrondo to account for a custom prefab as the road and talord / optimized to the Midterm assignment
+/// DEPRECATED : Now using RoadMapLineBuilder
 /// </summary>
 public class ArcGISFeatureLayerQueryMidtermVersion : MonoBehaviour
 {
