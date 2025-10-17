@@ -18,9 +18,9 @@ using UnityEngine.Splines;
 
 /// <summary>
 /// Creates a spline using data from a feature layer
-/// This version if modified by Logan Larrondo to account for a custom prefab as the road, and a checkpoint system
+/// This version if modified by Logan Larrondo to account for a custom prefab as the road and talord to the Midterm assignment
 /// </summary>
-public class ArcGISFeatureLayerComponent : MonoBehaviour
+public class ArcGISFeatureLayerQueryMidtermVersion : MonoBehaviour
 {
     [System.Serializable]
     public struct QueryLink
@@ -148,8 +148,6 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
                         rot = Quaternion.LookRotation(roadDir, Vector3.up);
 
                         GameObject checkpoint = Instantiate(checkpointPrefab, bezierKnot.Position, rot, transform);
-                        checkpoint.name = $"Checkpoint_{checkpointNum}";
-                        checkpoint.GetComponent<Checkpoint>().checkpointID = checkpointNum++;
                     }
                 }
                 else Debug.LogWarning("Checkpoint Prefab not assigned in inspector!");

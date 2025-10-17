@@ -463,7 +463,7 @@ MonoBehaviour:
     - Name: Terrain 3D
       Type: 0
       Source: https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer
-      IsEnabled: 1
+      IsEnabled: 0
       Authentication:
         ConfigurationIndex: -1
       AuthenticationType: 1
@@ -634,6 +634,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 530647291}
+  - component: {fileID: 530647292}
   m_Layer: 0
   m_Name: FeatureLayerQuery
   m_TagString: Untagged
@@ -656,6 +657,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 296207515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530647292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530647290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763ac76174144b242904984928e96c60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  featurePrefab: {fileID: 0}
+  checkpointPrefab: {fileID: 698966346235500562, guid: c3bbd1359bf2f8048a15b8b0aaa92d9e,
+    type: 3}
+  FeatureItems: []
+  WebLink:
+    Link: https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Transportation_v1/FeatureServer/0/query?where=1%3D1&geometry=%7B%22xmin%22:-74.2557,%22ymin%22:40.4960,%22xmax%22:-73.7800,%22ymax%22:40.9153,%22spatialReference%22:%7B%22wkid%22:4326%7D%7D&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&f=geojson
+    RequestHeaders: []
+  splineContainer: {fileID: 1787573545}
 --- !u!1 &608067721
 GameObject:
   m_ObjectHideFlags: 0
