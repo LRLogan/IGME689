@@ -18,7 +18,7 @@ using UnityEngine.Splines;
 
 /// <summary>
 /// Creates a spline using data from a feature layer
-/// This version if modified by Logan Larrondo to account for a custom prefab as the road and talord to the Midterm assignment
+/// This version if modified by Logan Larrondo to account for a custom prefab as the road and talord / optimized to the Midterm assignment
 /// </summary>
 public class ArcGISFeatureLayerQueryMidtermVersion : MonoBehaviour
 {
@@ -113,50 +113,81 @@ public class ArcGISFeatureLayerQueryMidtermVersion : MonoBehaviour
 
     private void CreateFeatures()
     {
-        int checkpointNum = 0;
-        Vector3? previousPos = null;
+        // Group features by the road name property to reduce the number of splines.
+        var groupedFeatures = jFeatures
+            .Where(f => f["properties"]?["NAME"] != null)
+            .GroupBy(f => f["properties"]["NAME"].ToString());
 
-        foreach (var feature in jFeatures)
+        Debug.Log($"Creating splines for {groupedFeatures.Count()} grouped roads.");
+
+        // Create a spline for each group of coords that share the parameters set above
+        foreach (var group in groupedFeatures)
         {
-            // Get coordinates in the Feature Service
-            var coordinates = feature.SelectToken("geometry").SelectToken("coordinates").ToArray();
+            string streetName = group.Key;
+            Spline newSpline = new Spline(0);
 
-            foreach (var coordinate in coordinates)
+            // For each feature (road segment) in the group
+            foreach (JToken feature in group)
             {
+                // Reset previous position so new segment doesn’t connect to the last one
+                Vector3? previousPos = null;
 
-                var currentFeature = new FeatureQueryData();
-                coordinates.ToArray();
-                currentFeature.Geometry.Latitude = Convert.ToDouble(coordinate[1]);
-                currentFeature.Geometry.Longitude = Convert.ToDouble(coordinate[0]);
-                // Create new ArcGIS Point and pass the Feature Lat and Long to it
-                var position = new ArcGISPoint(currentFeature.Geometry.Longitude, currentFeature.Geometry.Latitude, spawnHeight, new ArcGISSpatialReference(4326));
+                // Get coordinates in the Feature Service
+                var coordinates = feature.SelectToken("geometry.coordinates")?.ToArray();
+                if (coordinates == null || coordinates.Length == 0)
+                    continue;
 
-                // Create new Bezier Knot that stores transform data
-                BezierKnot bezierKnot = new BezierKnot();
-
-                // Convert ArcGISPoint to Engine Coordinates
-                bezierKnot.Position = mapComponent.GeographicToEngine(position);
-
-                // Spawn a checkpoint prefab at this position
-                if (checkpointPrefab != null)
+                // Handle each coordinate
+                foreach (JToken coordinate in coordinates)
                 {
-                    Quaternion rot = Quaternion.identity;
+                    var currentFeature = new FeatureQueryData();
+                    currentFeature.Geometry.Latitude = (double)coordinate[1];
+                    currentFeature.Geometry.Longitude = (double)coordinate[0];
 
-                    if (previousPos.HasValue)
+                    ArcGISPoint position = new ArcGISPoint(
+                        currentFeature.Geometry.Longitude,
+                        currentFeature.Geometry.Latitude,
+                        spawnHeight,
+                        new ArcGISSpatialReference(4326)
+                    );
+
+                    // Create new Bezier Knot that stores transform data
+                    BezierKnot knot = new BezierKnot
                     {
-                        Vector3 roadDir = ((Vector3)bezierKnot.Position - previousPos.Value).normalized;
-                        rot = Quaternion.LookRotation(roadDir, Vector3.up);
+                        Position = mapComponent.GeographicToEngine(position)
+                    };
 
-                        GameObject checkpoint = Instantiate(checkpointPrefab, bezierKnot.Position, rot, transform);
+                    // Spawn a checkpoint prefab at this position 
+                    if (checkpointPrefab != null)
+                    {
+                        if (previousPos.HasValue)
+                        {
+                            Vector3 roadDir = ((Vector3)knot.Position - previousPos.Value).normalized;
+                            Quaternion rot = Quaternion.LookRotation(roadDir, Vector3.up);
+                            Instantiate(checkpointPrefab, knot.Position, rot, transform);
+                        }
                     }
+                    else
+                    {
+                        Debug.LogWarning("Checkpoint Prefab not assigned in inspector!");
+                    }
+
+                    // Add converted position to the spline
+                    newSpline.Add(knot);
+                    previousPos = knot.Position;
                 }
-                else Debug.LogWarning("Checkpoint Prefab not assigned in inspector!");
-
-                // Add converted position to the splines container
-                splineContainer.Splines[0].Add(bezierKnot);
-
-                previousPos = bezierKnot.Position;
             }
+
+            // Add completed spline to container
+            splineContainer.AddSpline(newSpline);
         }
     }
+
+
+
+
+
+
+
+
 }

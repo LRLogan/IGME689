@@ -211,8 +211,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194123538}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.41777226, y: 0.3431463, z: -0.17440814, w: 0.82298166}
-  m_LocalPosition: {x: -1936.7994, y: 4871.4175, z: -2977.707}
+  m_LocalRotation: {x: 0.35189813, y: 0.40340942, z: -0.17168127, w: 0.8270152}
+  m_LocalPosition: {x: -3034.882, y: 4878.529, z: -11582.402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -360,18 +360,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position:
-    X: -74.02339856537859
-    Y: 40.69252132529765
-    Z: 4871.41748046875
-    SRWkid: 4326
+    X: -8240034.882080078
+    Y: 4967417.59765625
+    Z: 4878.52880859375
+    SRWkid: 3857
     SpatialReference:
-      WKID: 4326
+      WKID: 3857
       VerticalWKID: 0
     version: 1
   rotation:
-    Heading: 45.25036157366885
-    Pitch: 36.16384686622928
-    Roll: 359.96550085734157
+    Heading: 52.003592034723304
+    Pitch: 43.89878738399244
+    Roll: 359.9960336198176
   surfacePlacementMode: 0
   surfacePlacementOffset: 0
   version: 1
@@ -409,15 +409,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IsInitialized: 1
   m_LocalPosition:
-    x: -8240247.0350854825
-    y: 4871.41748046875
-    z: 4967093.872111182
+    x: -8240034.882080078
+    y: 4878.52880859375
+    z: 4967417.59765625
   m_LocalRotation:
     value:
-      x: -0.4177723
-      y: -0.3431463
-      z: 0.17440811
-      w: -0.8229816
+      x: -0.35189807
+      y: -0.40340942
+      z: 0.17168126
+      w: -0.82701516
   m_LocalScale:
     x: 1
     y: 1
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apiKey: 'AAPTxy8BH1VEsoebNVZXo8HurB11dCIymp9IAFVB_I_4Lb-GOupoRD9WzHT7rYgDQuDsxymftCO4hocgYbnrhpobcE8oCFbeSiEh5OLC_CvPm6JvQ1g5ebpCaeoVT-HMWNPH815wWQRw_JiW9bdxqr847RVk9Il5rLWBKkvYyiBz2Q5XRMK20E71hoZP7z1IA00haJCl1WOULqImsNLx-lEbRrqXtgcJR5kJFN5SuFqEZ1Q.AT1_mcybQ46J '
-  basemap: https://basemapstyles-api.arcgis.com/arcgis/rest/services/styles/v2/webmaps/arcgis/imagery/standard
+  basemap: https://basemapstyles-api.arcgis.com/arcgis/rest/services/styles/v2/webmaps/arcgis/navigation
   basemapType: 0
   basemapAuthentication:
     ConfigurationIndex: -1
@@ -489,12 +489,12 @@ MonoBehaviour:
     UseOriginAsCenter: 0
   layers: []
   originPosition:
-    X: -74.006
-    Y: 40.7128
+    X: -8237000
+    Y: 4979000
     Z: 0
-    SRWkid: 4326
+    SRWkid: 3857
     SpatialReference:
-      WKID: 4326
+      WKID: 3857
       VerticalWKID: 0
     version: 1
   mapType: 1
@@ -526,9 +526,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LocalPosition:
-    x: -8238310.235647004
+    x: -8237000
     y: 0
-    z: 4970071.579142429
+    z: 4979000
   m_LocalRotation:
     value:
       x: 0
@@ -555,6 +555,7 @@ Transform:
   - {fileID: 1224776150}
   - {fileID: 1412496479}
   - {fileID: 530647291}
+  - {fileID: 2082216667}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &307643090
@@ -641,7 +642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &530647291
 Transform:
   m_ObjectHideFlags: 0
@@ -704,7 +705,7 @@ Transform:
   m_GameObject: {fileID: 608067721}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10797.99, y: 0, z: 29784.87}
+  m_LocalPosition: {x: 9487.755, y: 0, z: 20856.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1010,7 +1011,7 @@ Transform:
   m_GameObject: {fileID: 987108777}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25158.205, y: 0, z: 29004.154}
+  m_LocalPosition: {x: 23847.969, y: 0, z: 20075.734}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1099,7 +1100,7 @@ Transform:
   m_GameObject: {fileID: 1224776149}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27796.477, y: 0, z: -31787.965}
+  m_LocalPosition: {x: -29106.713, y: 0, z: -40716.387}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1188,7 +1189,7 @@ Transform:
   m_GameObject: {fileID: 1412496478}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16809.242, y: 0, z: -25198.38}
+  m_LocalPosition: {x: 15499.008, y: 0, z: -34126.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1371,6 +1372,62 @@ MonoBehaviour:
       m_Data: []
   m_Knots:
     m_KnotsLink: []
+--- !u!1 &2082216666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2082216667}
+  - component: {fileID: 2082216668}
+  m_Layer: 0
+  m_Name: RoadBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2082216667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082216666}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 296207515}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2082216668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082216666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9cc1d688c8910f45a50a86a937702db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapComponent: {fileID: 296207513}
+  featureServiceUrl: https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Transportation_v1/FeatureServer/7/query
+  xMin: -8230000
+  xMax: -8210000
+  yMin: 4960000
+  yMax: 4980000
+  queryWebMercator3857: 0
+  roadMaterial: {fileID: 2100000, guid: b5a187ea3908e1b40a322a7ae8c1d205, type: 2}
+  lineWidth: 10
+  heightOffset: 10
+  groupByName: 1
+  onlyDrawIfValid: 0
 --- !u!1 &2086676185
 GameObject:
   m_ObjectHideFlags: 0
