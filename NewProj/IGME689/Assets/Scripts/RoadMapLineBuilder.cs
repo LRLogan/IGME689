@@ -35,6 +35,8 @@ public class RoadMapLineBuilder : MonoBehaviour
 
     public bool groupByName = false;            // set true to parent segments by NAME
 
+    public List<GameObject> lineArray;
+
     private void Start()
     {
         if (mapComponent == null)
@@ -42,6 +44,8 @@ public class RoadMapLineBuilder : MonoBehaviour
 
         if (roadMaterial == null)
             Debug.LogWarning("roadMaterial not assigned — assign a visible Unlit/Color material.");
+
+        lineArray = new List<GameObject>();
 
         StartCoroutine(QueryFeatureService());
     }
@@ -135,7 +139,7 @@ public class RoadMapLineBuilder : MonoBehaviour
 
     private void CreateRoadLines(JArray features)
     {
-        // Optionally parent segments by street name
+        // Parent segments by street name
         Dictionary<string, Transform> groupParents = new Dictionary<string, Transform>(StringComparer.OrdinalIgnoreCase);
 
         int drawn = 0;
@@ -162,6 +166,11 @@ public class RoadMapLineBuilder : MonoBehaviour
                         go.transform.parent = transform;
                         groupParents[name] = go.transform;
                         parent = go.transform;
+                        lineArray.Add(go);
+
+                        // Add RoadData and set its name
+                        RoadData data = go.AddComponent<RoadData>();
+                        data.roadName = name;
                     }
                     else parent = p;
                 }

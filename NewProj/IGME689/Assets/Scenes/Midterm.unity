@@ -549,7 +549,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 194123541}
-  - {fileID: 1787573544}
   - {fileID: 608067722}
   - {fileID: 987108778}
   - {fileID: 1224776150}
@@ -677,7 +676,7 @@ MonoBehaviour:
   WebLink:
     Link: https://services2.arcgis.com/FiaPA4ga0iQKduv3/ArcGIS/rest/services/Transportation_v1/FeatureServer/7/query?where=1%3D1&geometry=%7B%22xmin%22:-8265194.95,%22ymin%22:4934181.47,%22xmax%22:-8211773.97,%22ymax%22:4978649.49,%22spatialReference%22:%7B%22wkid%22:3857%7D%7D&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&f=geojson
     RequestHeaders: []
-  splineContainer: {fileID: 1787573545}
+  splineContainer: {fileID: 0}
 --- !u!1 &608067721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,78 +1299,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1787573543
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1787573544}
-  - component: {fileID: 1787573545}
-  m_Layer: 0
-  m_Name: Spline
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1787573544
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787573543}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 296207515}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1787573545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787573543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Spline:
-    m_EditModeType: 1
-    m_Knots: []
-    m_MetaData: []
-    m_Closed: 0
-    m_IntData:
-      m_Data: []
-    m_FloatData:
-      m_Data: []
-    m_Float4Data:
-      m_Data: []
-    m_ObjectData:
-      m_Data: []
-  m_Splines:
-  - m_EditModeType: 1
-    m_Knots: []
-    m_MetaData: []
-    m_Closed: 0
-    m_IntData:
-      m_Data: []
-    m_FloatData:
-      m_Data: []
-    m_Float4Data:
-      m_Data: []
-    m_ObjectData:
-      m_Data: []
-  m_Knots:
-    m_KnotsLink: []
 --- !u!1 &2082216666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,12 +1349,11 @@ MonoBehaviour:
   xMax: -8210000
   yMin: 4960000
   yMax: 4980000
-  queryWebMercator3857: 0
   roadMaterial: {fileID: 2100000, guid: b5a187ea3908e1b40a322a7ae8c1d205, type: 2}
   lineWidth: 10
   heightOffset: 10
   groupByName: 1
-  onlyDrawIfValid: 0
+  lineArray: []
 --- !u!1 &2086676185
 GameObject:
   m_ObjectHideFlags: 0
