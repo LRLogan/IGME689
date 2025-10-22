@@ -1309,6 +1309,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2082216667}
   - component: {fileID: 2082216668}
+  - component: {fileID: 2082216670}
+  - component: {fileID: 2082216669}
   m_Layer: 0
   m_Name: RoadBuilder
   m_TagString: Untagged
@@ -1354,6 +1356,35 @@ MonoBehaviour:
   heightOffset: 10
   groupByName: 1
   lineArray: []
+--- !u!114 &2082216669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082216666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aec7579e2e6b2944823eb0a7bfee0ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvParser: {fileID: 2082216670}
+  lineBuilder: {fileID: 2082216668}
+--- !u!114 &2082216670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082216666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f2792f1b11c374ead8ab8287bceb4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvFileName: TrafficCounts.csv
+  roadBuilder: {fileID: 2082216668}
+  normalizeNames: 1
 --- !u!1 &2086676185
 GameObject:
   m_ObjectHideFlags: 0

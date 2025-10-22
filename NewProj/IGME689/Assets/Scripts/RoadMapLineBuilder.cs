@@ -46,11 +46,9 @@ public class RoadMapLineBuilder : MonoBehaviour
             Debug.LogWarning("roadMaterial not assigned — assign a visible Unlit/Color material.");
 
         lineArray = new List<GameObject>();
-
-        StartCoroutine(QueryFeatureService());
     }
 
-    private IEnumerator QueryFeatureService()
+    public IEnumerator QueryFeatureService(Action onComplete)
     {
         string geometry;
         string outSR;
@@ -134,6 +132,7 @@ public class RoadMapLineBuilder : MonoBehaviour
 
         Debug.Log($"Total features collected: {allFeatures.Count}");
         CreateRoadLines(new JArray(allFeatures));
+        onComplete.Invoke();
     }
 
 

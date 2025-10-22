@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
+using Newtonsoft.Json.Linq;
+using System;
 
 /// <summary>
 /// Reads a traffic count CSV file and assigns data to each RoadData component.
@@ -33,12 +35,9 @@ public class RoadCountCSVParser : MonoBehaviour
             Debug.LogError("RoadCountCSVParser: RoadMapLineBuilder reference not assigned!");
             return;
         }
-
-        // Wait a short time to ensure roads have been built
-        StartCoroutine(WaitAndParse());
     }
 
-    private System.Collections.IEnumerator WaitAndParse()
+    public IEnumerator WaitAndParse(Action onComplete)
     {
         // Wait until roads have been generated
         yield return new WaitUntil(() => roadBuilder.lineArray != null && roadBuilder.lineArray.Count > 0);
@@ -54,6 +53,7 @@ public class RoadCountCSVParser : MonoBehaviour
         string csvText = File.ReadAllText(path);
         ParseCSV(csvText);
         ApplyToRoads();
+        onComplete.Invoke();
     }
 
     private void ParseCSV(string text)
