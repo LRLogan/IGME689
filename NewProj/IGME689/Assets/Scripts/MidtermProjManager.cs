@@ -9,6 +9,7 @@ public class MidtermProjManager : MonoBehaviour
     [SerializeField] private RoadMapLineBuilder lineBuilder;
 
     private bool roadSetUpFin = false;
+    private List<GameObject> lineArray;
 
     // Start is used as a wrapper function
     void Start()
@@ -20,6 +21,7 @@ public class MidtermProjManager : MonoBehaviour
     {
         StartCoroutine(lineBuilder.QueryFeatureService(() =>
         {
+            lineArray = lineBuilder.lineArray;
             AssignStartingData();
         }));
     }
@@ -31,5 +33,13 @@ public class MidtermProjManager : MonoBehaviour
             roadSetUpFin = true;
             Debug.Log($"Road set up complete: {roadSetUpFin}");
         }));
+    }
+
+    public void UpdateCValue(float cValue)
+    {
+        foreach(GameObject obj in lineArray)
+        {
+            obj.GetComponent<RoadData>().UpdateCValAndGrad(cValue);
+        }
     }
 }

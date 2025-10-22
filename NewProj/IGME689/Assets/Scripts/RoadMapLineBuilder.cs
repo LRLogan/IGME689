@@ -35,7 +35,7 @@ public class RoadMapLineBuilder : MonoBehaviour
 
     public bool groupByName = false;            // set true to parent segments by NAME
 
-    public List<GameObject> lineArray;
+    public List<GameObject> lineArray;          // Holds all parent objs
 
     private void Start()
     {
