@@ -580,6 +580,7 @@ GameObject:
   - component: {fileID: 194123544}
   - component: {fileID: 194123543}
   - component: {fileID: 194123542}
+  - component: {fileID: 194123546}
   m_Layer: 0
   m_Name: ArcGISCamera
   m_TagString: MainCamera
@@ -797,7 +798,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194123538}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e295d62bf65a7247bc772a43507fd4c, type: 3}
   m_Name: 
@@ -865,6 +866,23 @@ MonoBehaviour:
     x: 1
     y: 1
     z: 1
+--- !u!114 &194123546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194123538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e042d812e4872904ea4d99f7297c2ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 20
+  rotationSpeed: 100
+  zoomSpeed: 50
+  arcGISCamera: {fileID: 194123544}
+  locationComponent: {fileID: 194123543}
 --- !u!1 &281966874
 GameObject:
   m_ObjectHideFlags: 0
@@ -4362,8 +4380,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 261.81516, y: -117}
-  m_SizeDelta: {x: 521.6304, y: 236.0998}
+  m_AnchoredPosition: {x: 261.32, y: -85.129486}
+  m_SizeDelta: {x: 522.63, y: 172.3588}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058815371
 MonoBehaviour:
