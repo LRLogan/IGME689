@@ -15,6 +15,7 @@ public class MidtermProjManager : MonoBehaviour
     [SerializeField] private RoadMapLineBuilder lineBuilder;
     [SerializeField] private Toggle toggle;          // AM/PM toggle (true = PM, false = AM)
     [SerializeField] private TMP_Dropdown dropdown;  // Dropdown for hour selection (1–12)
+    [SerializeField] private GameObject loadingPannel;
 
     private List<GameObject> lineArray;
     private bool roadSetUpFin = false;
@@ -33,19 +34,27 @@ public class MidtermProjManager : MonoBehaviour
 
     private void StartSimulation()
     {
+        loadingPannel.GetComponentInChildren<TextMeshProUGUI>().text = 
+            "Traffic visualizer simulation now loading: \nFetching road data. This will take a moment.";
+
         StartCoroutine(lineBuilder.QueryFeatureService(() =>
         {
             lineArray = lineBuilder.lineArray;
             AssignStartingData();
-        }));
+        }, loadingPannel.GetComponentInChildren<TextMeshProUGUI>()));
     }
 
     private void AssignStartingData()
     {
+        loadingPannel.GetComponentInChildren<TextMeshProUGUI>().text = 
+            "Traffic visualizer simulation now loading: \nAnalyzing data and preparing simulation. " +
+            "\nThis will take a few minitues if this is your first time compiling project";
         StartCoroutine(csvParser.WaitAndParse(() =>
         {
             roadSetUpFin = true;
             Debug.Log($"Road setup complete: {roadSetUpFin}");
+
+            loadingPannel.SetActive(false);
 
             // Once setup is finished, initialize congestion view for the first hour.
             UpdateCongestionForSelectedHour();

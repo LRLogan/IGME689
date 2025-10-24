@@ -9,6 +9,7 @@ using System;
 using UnityEngine.Networking;
 using UnityEngine;
 using UnityEngine.Splines;
+using TMPro;
 
 /// <summary>
 /// Modular road builder using lines Written by Logan Larrondo
@@ -48,7 +49,7 @@ public class RoadMapLineBuilder : MonoBehaviour
         lineArray = new List<GameObject>();
     }
 
-    public IEnumerator QueryFeatureService(Action onComplete)
+    public IEnumerator QueryFeatureService(Action onComplete, TextMeshProUGUI progressDisplay)
     {
         string geometry;
         string outSR;
@@ -75,6 +76,8 @@ public class RoadMapLineBuilder : MonoBehaviour
                 $"&resultOffset={resultOffset}" +
                 $"&resultRecordCount={maxRecordCount}";
 
+            progressDisplay.text = "Traffic visualizer simulation now loading: \nFetching road data. This will take a moment." +
+                $"\nRequesting records {resultOffset}–{resultOffset + maxRecordCount}";
             Debug.Log($"Requesting records {resultOffset}–{resultOffset + maxRecordCount}");
 
             // In the end this code gets the data in geoJSON format while catching exceptions
