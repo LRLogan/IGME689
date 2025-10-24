@@ -31,12 +31,17 @@ public class RoadData : MonoBehaviour
     /// <param name="newVal">Float between 0 and 1 representing congestion intensity.</param>
     public void UpdateCValAndGrad(float newVal)
     {
-        congestionValue = Mathf.Clamp01(newVal);
 
         if(newVal != 0)
         {
-            // Map congestion value (0 = green, 1 = red)
+
+            // Normalize traffic count (1–500) into a 0–1 range
+            float normalizedVal = Mathf.InverseLerp(1f, 500f, newVal);
+            congestionValue = Mathf.Clamp01(normalizedVal);
+
+            // Choose color: green (free) -> red (jammed)
             UnityEngine.Color color = UnityEngine.Color.Lerp(UnityEngine.Color.green, UnityEngine.Color.red, congestionValue);
+
 
             // Apply to all child LineRenderers
             if (lines == null || lines.Length == 0)
@@ -45,7 +50,7 @@ public class RoadData : MonoBehaviour
                 if (lines.Length == 0) return;
             }
 
-            Debug.Log($"Changing the gradient of {this.gameObject.name} with val of {newVal}");
+            Debug.Log($"Changing the gradient of {this.gameObject.name} with val of {normalizedVal}");
             foreach (var lr in lines)
             {
                 if (lr == null) continue;
@@ -68,7 +73,7 @@ public class RoadData : MonoBehaviour
         }
         else
         {
-            UnityEngine.Color color = UnityEngine.Color.blue;
+            UnityEngine.Color color = UnityEngine.Color.white;
 
             foreach (var lr in lines)
             {

@@ -555,7 +555,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194123538}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e295d62bf65a7247bc772a43507fd4c, type: 3}
   m_Name: 
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   apiKey: 'AAPTxy8BH1VEsoebNVZXo8HurB11dCIymp9IAFVB_I_4Lb-GOupoRD9WzHT7rYgDQuDsxymftCO4hocgYbnrhpobcE8oCFbeSiEh5OLC_CvPm6JvQ1g5ebpCaeoVT-HMWNPH815wWQRw_JiW9bdxqr847RVk9Il5rLWBKkvYyiBz2Q5XRMK20E71hoZP7z1IA00haJCl1WOULqImsNLx-lEbRrqXtgcJR5kJFN5SuFqEZ1Q.AT1_mcybQ46J '
-  basemap: https://basemapstyles-api.arcgis.com/arcgis/rest/services/styles/v2/webmaps/arcgis/navigation
+  basemap: https://basemapstyles-api.arcgis.com/arcgis/rest/services/styles/v2/webmaps/osm/dark-gray
   basemapType: 0
   basemapAuthentication:
     ConfigurationIndex: -1
@@ -754,7 +754,6 @@ Transform:
   - {fileID: 987108778}
   - {fileID: 1224776150}
   - {fileID: 1412496479}
-  - {fileID: 530647291}
   - {fileID: 2082216667}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1058,58 +1057,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516729235}
   m_CullTransparentMesh: 1
---- !u!1 &530647290
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 530647291}
-  - component: {fileID: 530647292}
-  m_Layer: 0
-  m_Name: FeatureLayerQuery
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &530647291
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530647290}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 296207515}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &530647292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530647290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 763ac76174144b242904984928e96c60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  featurePrefab: {fileID: 0}
-  checkpointPrefab: {fileID: 698966346235500562, guid: c3bbd1359bf2f8048a15b8b0aaa92d9e,
-    type: 3}
-  FeatureItems: []
-  WebLink:
-    Link: https://services2.arcgis.com/FiaPA4ga0iQKduv3/ArcGIS/rest/services/Transportation_v1/FeatureServer/7/query?where=1%3D1&geometry=%7B%22xmin%22:-8265194.95,%22ymin%22:4934181.47,%22xmax%22:-8211773.97,%22ymax%22:4978649.49,%22spatialReference%22:%7B%22wkid%22:3857%7D%7D&geometryType=esriGeometryEnvelope&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&f=geojson
-    RequestHeaders: []
-  splineContainer: {fileID: 0}
 --- !u!1 &563486387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1231,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 608067721}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e295d62bf65a7247bc772a43507fd4c, type: 3}
   m_Name: 
@@ -2031,7 +1978,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 987108777}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e295d62bf65a7247bc772a43507fd4c, type: 3}
   m_Name: 
@@ -2303,7 +2250,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224776149}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e295d62bf65a7247bc772a43507fd4c, type: 3}
   m_Name: 
@@ -2526,7 +2473,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412496478}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e295d62bf65a7247bc772a43507fd4c, type: 3}
   m_Name: 
