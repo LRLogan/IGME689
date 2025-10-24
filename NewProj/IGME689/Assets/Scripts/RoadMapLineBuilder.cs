@@ -56,7 +56,7 @@ public class RoadMapLineBuilder : MonoBehaviour
         outSR = "4326";
 
         int resultOffset = 0;
-        int maxRecordCount = 2000; // from layer metadata
+        int maxRecordCount = 2000; 
         bool hasMore = true;
 
         List<JToken> allFeatures = new List<JToken>();

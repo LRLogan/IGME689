@@ -11,12 +11,17 @@ public class RoadData : MonoBehaviour
 
     private void Start()
     {
-        averageCount = new Dictionary<int, float>();
-        lines = GetComponentsInChildren<LineRenderer>();
+        // Only create dictionary if not already assigned
+        if (averageCount == null)
+        {
+            averageCount = new Dictionary<int, float>();
 
-        // Assign default hour keys
-        for (int i = 1; i < 25; i++)
-            averageCount[i] = 0;
+            // Assign default hour keys (set to 0)
+            for (int i = 1; i <= 24; i++)
+                averageCount[i] = 0;
+        }
+
+        lines = GetComponentsInChildren<LineRenderer>();
     }
 
     /// <summary>
@@ -37,7 +42,7 @@ public class RoadData : MonoBehaviour
             if (lines.Length == 0) return;
         }
 
-        Debug.Log($"Changing the gradient of {this.gameObject.name}");
+        Debug.Log($"Changing the gradient of {this.gameObject.name} with val of {newVal}");
         foreach (var lr in lines)
         {
             if (lr == null) continue;
