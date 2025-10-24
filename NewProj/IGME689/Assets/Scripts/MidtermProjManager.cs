@@ -24,10 +24,10 @@ public class MidtermProjManager : MonoBehaviour
     // Weather multipliers
     private readonly Dictionary<string, float> weatherMultipliers = new Dictionary<string, float>
     {
-        { "Clear", 1.0f },
-        { "Light Rain", 1.1f },
-        { "Heavy Rain", 1.25f },
-        { "Snow", 1.4f }
+        { "Weather clear", 1.0f },
+        { "Weather light rain", 1.25f },
+        { "Weather heavy rain", 1.4f },
+        { "Weather snow", 1.8f }
     };
 
     private void Start()
