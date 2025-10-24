@@ -102,13 +102,8 @@ public class RoadCountCSVParser : MonoBehaviour
                     hourly[h] = val;
                 else
                     hourly[h] = 0f;
-                if (i < 3 && h == 0)
-                    Debug.Log($"Parsed {name}: first hour value = {hourly[h]} (raw: {raw})");
 
             }
-
-            if (hourly.Sum() == 0)
-                Debug.LogWarning($"All zero row for {name}. Example: {string.Join(",", row.Skip(7).Take(5))}");
 
 
             if (!csvDailyData.ContainsKey(name))

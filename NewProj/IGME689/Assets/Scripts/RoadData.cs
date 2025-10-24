@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class RoadData : MonoBehaviour
@@ -32,35 +33,62 @@ public class RoadData : MonoBehaviour
     {
         congestionValue = Mathf.Clamp01(newVal);
 
-        // Map congestion value (0 = green, 1 = red)
-        Color color = Color.Lerp(Color.green, Color.red, congestionValue);
-
-        // Apply to all child LineRenderers
-        if (lines == null || lines.Length == 0)
+        if(newVal != 0)
         {
-            lines = GetComponentsInChildren<LineRenderer>();
-            if (lines.Length == 0) return;
-        }
+            // Map congestion value (0 = green, 1 = red)
+            UnityEngine.Color color = UnityEngine.Color.Lerp(UnityEngine.Color.green, UnityEngine.Color.red, congestionValue);
 
-        Debug.Log($"Changing the gradient of {this.gameObject.name} with val of {newVal}");
-        foreach (var lr in lines)
-        {
-            if (lr == null) continue;
+            // Apply to all child LineRenderers
+            if (lines == null || lines.Length == 0)
+            {
+                lines = GetComponentsInChildren<LineRenderer>();
+                if (lines.Length == 0) return;
+            }
 
-            // Use a gradient so the line looks smooth
-            Gradient gradient = new Gradient();
-            gradient.SetKeys(
-                new GradientColorKey[] {
+            Debug.Log($"Changing the gradient of {this.gameObject.name} with val of {newVal}");
+            foreach (var lr in lines)
+            {
+                if (lr == null) continue;
+
+                // Use a gradient so the line looks smooth
+                Gradient gradient = new Gradient();
+                gradient.SetKeys(
+                    new GradientColorKey[] {
                     new GradientColorKey(color, 0f),
                     new GradientColorKey(color, 1f)
-                },
-                new GradientAlphaKey[] {
+                    },
+                    new GradientAlphaKey[] {
                     new GradientAlphaKey(1f, 0f),
                     new GradientAlphaKey(1f, 1f)
-                }
-            );
+                    }
+                );
 
-            lr.colorGradient = gradient;
+                lr.colorGradient = gradient;
+            }
+        }
+        else
+        {
+            UnityEngine.Color color = UnityEngine.Color.blue;
+
+            foreach (var lr in lines)
+            {
+                if (lr == null) continue;
+
+                // Use a gradient so the line looks smooth
+                Gradient gradient = new Gradient();
+                gradient.SetKeys(
+                    new GradientColorKey[] {
+                    new GradientColorKey(color, 0f),
+                    new GradientColorKey(color, 1f)
+                    },
+                    new GradientAlphaKey[] {
+                    new GradientAlphaKey(1f, 0f),
+                    new GradientAlphaKey(1f, 1f)
+                    }
+                );
+
+                lr.colorGradient = gradient;
+            }
         }
     }
 }

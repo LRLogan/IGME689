@@ -85,7 +85,7 @@ public class MidtermProjManager : MonoBehaviour
             if (data == null || data.averageCount == null || data.averageCount.Count == 0)
                 continue;
 
-            // averageCount keys are 1–24 (1 = 12AM–1AM, 24 = 11PM–12AM)
+            // averageCount keys are 1–24 (1 = 12AM–1AM, 24 = 11PM–12AM) so we add 1 to index
             if (data.averageCount.TryGetValue(hourIndex + 1, out float value))
             {
                 data.congestionValue = value;
@@ -101,7 +101,7 @@ public class MidtermProjManager : MonoBehaviour
     /// </summary>
     private int GetSelectedHourIndex()
     {
-        int selectedHour = dropdown != null ? dropdown.value : 1; // Dropdown values 0–11 -> hours 1–12
+        int selectedHour = dropdown != null ? dropdown.value : 1; // Dropdown values 
         bool isPM = toggle != null && toggle.isOn;
 
         // Convert 12-hour format to 24-hour index
