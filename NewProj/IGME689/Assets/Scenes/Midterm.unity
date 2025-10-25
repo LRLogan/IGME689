@@ -875,14 +875,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 194123538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e042d812e4872904ea4d99f7297c2ba0, type: 3}
+  m_Script: {fileID: 11500000, guid: 27afbdfc83e47004e95ef7726ed4a9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
-  rotationSpeed: 100
-  zoomSpeed: 50
-  arcGISCamera: {fileID: 194123544}
-  locationComponent: {fileID: 194123543}
+  MaxSpeed: 2000000
+  MinSpeed: 1000
+  IgnoreUI: 0
+  EnableLeftDragging: 1
+  EnableRightDragging: 1
 --- !u!1 &281966874
 GameObject:
   m_ObjectHideFlags: 0
